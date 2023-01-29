@@ -4,7 +4,7 @@
 
 <br>
 
-```
+```java
 entityManager.persist(entity);
 ```
 + Entity를 영속성 컨텍스트에 저장하는 코드이며, 해당 코드는 DB에 저장이 안 된 상태이다.(트랜잭션이 끝나야 DB에 반영을 한다)
@@ -12,7 +12,7 @@ entityManager.persist(entity);
 ## EntityManager
 + EntityManager는 영속성 컨텍스트 내에서 Entity들을 관리하고 있다.
 + EntityManager는 JPA에서 제공하는 interface로 spring bean으로 등록되어 있어 Autowired로 사용할 수 있다.
-```
+```java
 @Autowired
 private EntityManager entityManager;
 ```
@@ -42,7 +42,7 @@ private EntityManager entityManager;
 ### 1차 캐시
 + 영속성 컨텍스트 내부에는 캐시가 있는데 이를 1차 캐시라고 부른다.
 + 캐시는 Map의 형태로 만들어지며 key는 id값, value는 해당 entity값이 들어 있다.
-```
+```java
 // entityManager.find(엔티티 클래스 타입, 식별자 값);
 User findUser = entityManager.find("User.class", "1L");
 ```
@@ -58,7 +58,7 @@ User findUser = entityManager.find("User.class", "1L");
 <br>
 
 ### 트랜잭션을 지원하는 쓰기 지연
-```
+```java
 entityManager.flush();
 ```
 + entity값을 변경하면 DB에 바로 업데이트 하지 않는다.
@@ -74,7 +74,7 @@ entityManager.flush();
 
 ### 비영속
 + 엔티티 객체를 생성했지만 아직 영속성 컨텍스트에 저장하지 않은 상태를 비영속이라 한다.
-```
+```java
 //객체만 생성한 비영속상태 
     User user = new User();
 ```
@@ -83,7 +83,7 @@ entityManager.flush();
 
 ### 영속
 + 엔티티 매니저를 통해서 엔티티를 영속성 컨텍스트에 저장한 상태를 말하며 영속성 컨텍스트에 의해 관리 된다는 뜻.
-```
+```java
 @Autowired
 private EntityManager entityManager;
 // Class내에 Autowired로 EntityManager추가
@@ -96,8 +96,8 @@ private EntityManager entityManager;
 ```
 
 ### 준영속
-+ 영속성 컨텍스트가 관리하던 영속 상태의 엔티티를 더이상 관리하지 않으면 준영속 상태가 된다. 특정 엔티티를 준영속 상태로 만드려면 em.datch()를 호출하면 된다.
-```
++ 영속성 컨텍스트가 관리하던 영속 상태의 엔티티를 더이상 관리하지 않으면 준영속 상태가 된다. 특정 엔티티를 준영속 상태로 만드려면 em.detch()를 호출하면 된다.
+```java
 // 영속 -> 준영속
     // user엔티티를 영속성 컨텍스트에서 분리하면 준영속 상태가 된다.
     entityManager.detach(user);
@@ -116,7 +116,7 @@ private EntityManager entityManager;
 
 ### 삭제
 + 엔티티를 영속성 컨텍스트와 데이터베이스에서 삭제한다.
-```
+```java
  // user엔티티를 영속성 컨텍스트와 DB에서 삭제
     entityManager.remove(user);
 ```
